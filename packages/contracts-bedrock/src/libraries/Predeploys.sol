@@ -111,6 +111,9 @@ library Predeploys {
     /// @notice Address of the SuperchainTokenBridge predeploy.
     address internal constant SUPERCHAIN_TOKEN_BRIDGE = 0x4200000000000000000000000000000000000028;
 
+    /// @notice Address of the SuperchainERC721Bridge predeploy.
+    address internal constant SUPERCHAIN_NFT_BRIDGE = 0x4200000000000000000000000000000000000029;
+
     /// @notice Returns the name of the predeploy at the given address.
     function getName(address _addr) internal pure returns (string memory out_) {
         require(isPredeployNamespace(_addr), "Predeploys: address must be a predeploy");
@@ -143,6 +146,7 @@ library Predeploys {
         if (_addr == OPTIMISM_SUPERCHAIN_ERC20_FACTORY) return "OptimismSuperchainERC20Factory";
         if (_addr == OPTIMISM_SUPERCHAIN_ERC20_BEACON) return "OptimismSuperchainERC20Beacon";
         if (_addr == SUPERCHAIN_TOKEN_BRIDGE) return "SuperchainTokenBridge";
+        if (_addr == SUPERCHAIN_NFT_BRIDGE) return "SuperchainNFTBridge";
         revert("Predeploys: unnamed predeploy");
     }
 
@@ -161,7 +165,8 @@ library Predeploys {
             || _addr == L1_FEE_VAULT || _addr == OPERATOR_FEE_VAULT || _addr == SCHEMA_REGISTRY || _addr == EAS
             || _addr == GOVERNANCE_TOKEN || (_useInterop && _addr == CROSS_L2_INBOX)
             || (_useInterop && _addr == L2_TO_L2_CROSS_DOMAIN_MESSENGER) || (_useInterop && _addr == SUPERCHAIN_ETH_BRIDGE)
-            || (_useInterop && _addr == ETH_LIQUIDITY) || (_useInterop && _addr == SUPERCHAIN_TOKEN_BRIDGE);
+            || (_useInterop && _addr == ETH_LIQUIDITY) || (_useInterop && _addr == SUPERCHAIN_TOKEN_BRIDGE)
+            || (_useInterop && _addr == SUPERCHAIN_NFT_BRIDGE);
     }
 
     function isPredeployNamespace(address _addr) internal pure returns (bool) {
