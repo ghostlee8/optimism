@@ -193,7 +193,7 @@ contract SuperchainNFTBridgeTest is Test {
     }
 
     /// @notice Tests the `relayERC721` mints the proper amount and emits the `RelayERC721` event.
-    function testFuzz_relayERC721_succeeds(address _from, address _to, uint256 _tokenId, uint256 _source) public {
+    function testFuzz_relayERC721_succeeds(address _to, uint256 _tokenId, uint256 _source) public {
         vm.assume(_to != ZERO_ADDRESS);
 
         // Mock the call over the `crossDomainMessageContext` function setting the same address as value
@@ -205,7 +205,7 @@ contract SuperchainNFTBridgeTest is Test {
 
         // Get the total supply and balance of `_to` before the relay to compare later on the assertions
         vm.expectRevert("ERC721: invalid token ID");
-        address _ownerBefore = IERC721(address(superchainERC721)).ownerOf(_tokenId);
+        IERC721(address(superchainERC721)).ownerOf(_tokenId);
         uint256 _toBalanceBefore = IERC721(address(superchainERC721)).balanceOf(_to);
 
         // Look for the emit of the `Transfer` event
